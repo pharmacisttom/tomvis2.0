@@ -1,6 +1,6 @@
-# Tomvis V2 — local Sandbox prototype
+# Tomvis V3 — development alpha
 
-Version 2.0.0-alpha.1. Independent Feedback reference prototype. V1 source at https://github.com/pharmacisttom/Tomvis is preserved; this prototype is **not a completed migration or production framework**. Target repository: https://github.com/pharmacisttom/tomvis2.0.
+Version 3.0.0-alpha.1. Independent Feedback reference prototype. V1 source at https://github.com/pharmacisttom/Tomvis is preserved; this prototype is **not a completed migration or production framework**. Target repository: https://github.com/pharmacisttom/tomvis2.0.
 
 Requires Node 22.17+ with native experimental SQLite. No npm dependencies.
 
@@ -16,6 +16,6 @@ Includes dashboard, persistent Feedback create/resolve/search/filter, users, per
 
 `npm test`, `npm run build`, `npm run doctor`. Doctor requires the password environment variable. `build` checks JavaScript syntax; there is no bundling. Browser layout and accessibility QA remain pending.
 
-SQLite schema is initialized and versioned locally; a full reviewed incremental migration runner remains pending. API list is capped at 100 records; pagination/sorting, custom roles, account lockout, 2FA/reset, external adapters, API keys, webhook delivery, sandbox lifecycle, MySQL support and production deployment are not yet implemented. Sessions are SHA-256 digested at rest; mutations and audits share transactions. V1 already implements several identity controls and should be reused for the production migration rather than replaced by this prototype.
+SQLite now uses checksummed transactional incremental migrations, with legacy V2 compatibility and tenant-query indexes. MySQL migration integration remains pending. API list is capped at 100 records; pagination/sorting, custom roles, account lockout, 2FA/reset, external adapters, API keys, webhook delivery, sandbox lifecycle, MySQL support and production deployment are not yet implemented. Sessions are SHA-256 digested at rest; mutations and audits share transactions. V1 already implements several identity controls and should be reused for the production migration rather than replaced by this prototype.
 
-See docs/v2/V1_AUDIT.md and docs/v2/ARCHITECTURE.md.
+See docs/v3/DEVELOPMENT_PLAN.md for the V3 milestones and acceptance gates. Historical V1 audit and V2 decisions remain in docs/v2.

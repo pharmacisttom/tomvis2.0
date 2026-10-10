@@ -5,6 +5,8 @@ import {fileURLToPath} from 'node:url';
 import {createDatabase,seed} from '../packages/database/index.js';
 import {verifyPassword,redact} from '../packages/security/index.js';
 import {can,roles} from '../packages/rbac/index.js';
+import {migrations} from './migrations.js';
+import {runtimeConfig,VERSION} from '../packages/config/index.js';
 
 export function createApp(db,{mode='sandbox'}={}) {
  if(!['sandbox','demo','development'].includes(mode))throw Error('This alpha supports isolated local environments only');
@@ -18,7 +20,7 @@ export function createApp(db,{mode='sandbox'}={}) {
  try {
  const hostname=(req.headers.host||'').split(':')[0];if(!['localhost','127.0.0.1'].includes(hostname))fail(403,'Local host required');
  const url=new URL(req.url,'http://localhost');
- if(url.pathname==='/api/health')return reply(200,{status:'ok',version:'2.0.0-alpha.1'});
+ if(url.pathname==='/api/health')return reply(200,{status:'ok',version:VERSION});
  if(!url.pathname.startsWith('/api/')) {if(req.method!=='GET')return reply(405,'Method not allowed','METHOD_NOT_ALLOWED');const files={'/':'index.html','/app.js':'app.js','/style.css':'style.css'};const file=files[url.pathname];if(!file)return reply(404,'Not found','NOT_FOUND');res.setHeader('Content-Type',file.endsWith('.css')?'text/css':file.endsWith('.js')?'text/javascript':'text/html; charset=utf-8');return res.end(readFileSync(fileURLToPath(new URL(`./public/${file}`,import.meta.url))));}
  const now=Date.now();const ip=req.socket.remoteAddress;for(const [key,value] of limits)if(value.until<now)limits.delete(key);let bucket=limits.get(ip);if(!bucket){bucket={count:0,until:now+60000};limits.set(ip,bucket);}if(++bucket.count>120)return reply(429,'Too many requests','RATE_LIMITED');
  if(['POST','PATCH','DELETE'].includes(req.method)) {if(req.headers['sec-fetch-site']==='cross-site')fail(403,'Cross-site request blocked');if(req.headers.origin!==`http://${req.headers.host}`)fail(403,'Origin rejected');if(!req.headers['content-type']?.startsWith('application/json'))fail(415,'JSON required');}
@@ -44,4 +46,4 @@ export function createApp(db,{mode='sandbox'}={}) {
  }catch(e){reply(e.status||500,e.status?e.message:'Internal server error',`HTTP_${e.status||500}`);}
  });
 }
-if(process.argv[1]===fileURLToPath(import.meta.url)) {const password=process.env.TOMVIS_DEMO_PASSWORD;if(!password||password.length<12)throw Error('Set TOMVIS_DEMO_PASSWORD to at least 12 characters');const mode=process.env.TOMVIS_MODE||'sandbox';if(!['sandbox','demo','development'].includes(mode))throw Error('Production/staging unsupported in this alpha');mkdirSync('data',{recursive:true});const db=createDatabase(`data/${mode}.sqlite`,password);createApp(db,{mode}).listen(Number(process.env.PORT||3000),'127.0.0.1',()=>console.log(`Tomvis ${mode}: http://localhost:${process.env.PORT||3000}`));}
+if(process.argv[1]===fileURLToPath(import.meta.url)) {const config=runtimeConfig();mkdirSync('data',{recursive:true});const db=createDatabase(config.databasePath,config.password,migrations);createApp(db,{mode:config.mode}).listen(config.port,config.host,()=>console.log(`Tomvis ${VERSION} ${config.mode}: http://localhost:${config.port}`));}
