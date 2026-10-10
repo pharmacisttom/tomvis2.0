@@ -3,7 +3,17 @@
 Updated 2026-10-10. Version 3.0.0-alpha.1 is a development milestone, not a production-readiness claim.
 
 ## Product scope
-Reusable domain-neutral framework with Feedback as the provisional reference application. The user's original V2 specification remains the feature baseline. Production target retains the audited V1 Next.js, Prisma/MySQL and identity controls. Local SQLite code remains a sandbox prototype until production composition and migration are validated.
+Reusable domain-neutral framework hosting **TomvisHIMPro Developer Studio**, the user's clarified primary product: a central workspace for systems running on VPS and monitoring their operation. Feedback remains a reference module for framework tests. The user's original V2 specification remains the feature baseline. Production target retains the audited V1 Next.js, Prisma/MySQL and identity controls. Local SQLite code remains a sandbox prototype until production composition and migration are validated.
+
+## Developer Studio scope (user clarification)
+- System registry: project, repository, owner, deployment environment, domain and permitted host assignments.
+- VPS inventory: logical host records, adapter type (PM2/Docker/other), connection status and explicit access scopes. No secrets in records or API responses.
+- Monitoring: real health probes, freshness timestamps, unknown/unreachable states, uptime history, resource/process/container metrics where adapters provide them, and incident notifications.
+- Operations: authorized log access, deploy history, rollback metadata and audited operational actions. Start with read-only monitoring; production deploy/restart/rollback requires a separately reviewed workflow and explicit operational authorization.
+- Environment separation: development/demo/sandbox/staging/production per system; no sandbox connector may use production credentials.
+- Security: tenant ownership and resource permissions for every host/project/action; least-privilege collectors, redaction, retention limits, bounded requests and SSRF-safe probe configuration.
+
+Repository/path for existing TomvisHIMPro Developer Studio, VPS system inventory and current monitoring tooling have been requested. Live infrastructure access has not been supplied or performed. Do not fabricate online/healthy status, metrics or uptime. Unknown and not-connected are first-class states.
 
 ## Milestones and release gates
 1. Foundation: versioned internal package boundaries, module registry, configuration validation, incremental migrations, migration rollback tests, CI and developer commands. First increment adds an actual migration runner and centralized runtime validation.
