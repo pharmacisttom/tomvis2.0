@@ -6,6 +6,7 @@ Updated 2026-10-10. Version 3.0.0-alpha.1 is a development milestone, not a prod
 Reusable domain-neutral framework hosting **TomvisHIMPro Developer Studio**, the user's clarified primary product: a central workspace for systems running on VPS and monitoring their operation. Feedback remains a reference module for framework tests. The user's original V2 specification remains the feature baseline. Production target retains the audited V1 Next.js, Prisma/MySQL and identity controls. Local SQLite code remains a sandbox prototype until production composition and migration are validated.
 
 ## Developer Studio scope (user clarification)
+- Per-tenant Backup & Recovery: encrypted off-site/offline or immutable backups, retention, RPO/RTO, scoped restore and restore-test evidence. See BACKUP_RECOVERY.md; backup executor/storage/restore integration remain pending.
 - Configurable customer/system security-test policy and release gates: see SECURITY_TESTING.md. Validator and CI are implemented; live pentest and scanner integration remain pending.
 - Per-customer package licensing: developer-only production issuance, tenant/product-bound signed licenses and backend package entitlements. See LICENSING.md; runtime implementation and commercial package values remain pending.
 - System registry: project, repository, owner, deployment environment, domain and permitted host assignments.
