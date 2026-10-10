@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {authorizeScan} from '../packages/security/scan-policy.js';
+const context={tenantId:'a',userId:'developer',permissions:['security.scan']};
+const policy={tenantId:'a',enabled:true,environment:'staging',allowActive:false,allowedOrigins:['https://approved.example'],requestsPerMinute:30,maxDurationSeconds:60,authorization:{approvedBy:'owner',startsAt:0,expiresAt:100000,origins:['https://approved.example']}};
+const request={target:'https://approved.example',mode:'passive'};
+test('approved tenant scan creates a bounded immutable job specification',()=>{const job=authorizeScan(context,policy,request,1000);assert.equal(job.target,'https://approved.example');assert.equal(job.requestsPerMinute,30);assert(Object.isFrozen(job));});
+test('cross-tenant, unauthorized, expired and disabled scans are denied',()=>{assert.throws(()=>authorizeScan({...context,tenantId:'b'},policy,request,1000));assert.throws(()=>authorizeScan({...context,permissions:[]},policy,request,1000));assert.throws(()=>authorizeScan(context,policy,request,100000));assert.throws(()=>authorizeScan(context,{...policy,enabled:false},request,1000));});
+test('active scanning requires explicit staging permission and production remains passive',()=>{assert.throws(()=>authorizeScan(context,policy,{...request,mode:'active'},1000));assert.equal(authorizeScan(context,{...policy,allowActive:true},{...request,mode:'active'},1000).mode,'active');assert.throws(()=>authorizeScan(context,{...policy,environment:'production',allowActive:true},{...request,mode:'active'},1000));});
+test('out-of-scope, credentials, query strings and unbounded jobs are denied',()=>{for(const target of ['https://other.example','http://approved.example','https://user:pass@approved.example','https://approved.example/?token=secret'])assert.throws(()=>authorizeScan(context,policy,{...request,target},1000));assert.throws(()=>authorizeScan(context,{...policy,requestsPerMinute:1000},request,1000));});
