@@ -1,0 +1,10 @@
+import {spawnSync} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import {resolve} from 'node:path';
+const local=process.platform==='win32'?'.venv/Scripts/python.exe':'.venv/bin/python';
+const python=process.env.TOMVIS_PYTHON||(existsSync(local)?resolve(local):'python');
+const args=process.argv.includes('--hybrid')?['tests/hybrid-smoke.py']:['-m','unittest','discover','-s','tests/python','-v'];
+if(process.argv.includes('--browser'))args.push('--browser');
+const result=spawnSync(python,args,{stdio:'inherit'});
+if(result.error)console.error(result.error.message);
+process.exitCode=result.status??1;

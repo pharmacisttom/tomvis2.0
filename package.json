@@ -7,13 +7,24 @@
     "node": ">=22.17"
   },
   "scripts": {
-    "dev": "node apps/server.js",
-    "start": "node apps/server.js",
+    "dev": "node scripts/dev-hybrid.js",
+    "start": "node scripts/dev-hybrid.js --production-build",
     "test": "node --test tests/*.test.js",
     "doctor": "node scripts/doctor.js",
-    "build": "node --check apps/server.js && node --check apps/public/app.js",
-    "deploy:check": "node scripts/doctor.js",
+    "build": "npm run build --workspace @tomvis/web",
+    "deploy:check": "node scripts/doctor.js --deploy",
     "docs:generate": "node scripts/generate-manual.js",
-    "prebuild": "npm run docs:generate"
+    "prebuild": "npm run docs:generate",
+    "dev:legacy": "node apps/server.js",
+    "test:python": "node scripts/python-test.js",
+    "predev": "npm run docs:generate",
+    "test:hybrid": "node scripts/python-test.js --hybrid",
+    "test:browser": "node scripts/python-test.js --hybrid --browser"
+  },
+  "workspaces": [
+    "apps/web"
+  ],
+  "devDependencies": {
+    "playwright": "1.64.0"
   }
 }

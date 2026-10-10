@@ -46,6 +46,25 @@ Required permissions: sandbox.reset
 3. กดยืนยัน Reset เพื่อแทนที่ Feedback ทดลองด้วยข้อมูลเริ่มต้น
 4. บัญชีผู้ใช้และ Audit ยังคงอยู่หลัง Reset
 
+## สร้างรายงาน ส่งออก และสั่งพิมพ์
+
+Required permissions: feedback.view
+
+1. เลือก Reports แล้วเลือกแหล่งข้อมูลที่มีสิทธิ์
+2. กรอกชื่อรายงานและตัวกรอง แล้วกด สร้างรายงาน
+3. ตรวจจำนวนทั้งหมดและคำเตือนกรณีข้อมูลถูกจำกัด
+4. กด ส่งออก CSV หรือ พิมพ์ / บันทึก PDF
+5. ระบบบัญชีและ HR จะแสดงเมื่อเชื่อม Report Adapter จริงแล้ว
+
+## ตรวจข้อผิดพลาด Framework
+
+Required permissions: audit.view
+
+1. เลือก System errors เพื่อดูข้อผิดพลาดที่บันทึกใน Workspace
+2. ตรวจประเภท จำนวนครั้ง เวอร์ชัน Framework และ Request ID
+3. ใช้ fingerprint และเวอร์ชันเพื่อจัดกลุ่มปัญหาที่ควรแก้ใน Core
+4. ระบบยังไม่ส่งรายงานจาก VPS ลูกค้ามาศูนย์กลางโดยอัตโนมัติ
+
 ## ค้นหาและดู Feedback
 
 Required permissions: feedback.view

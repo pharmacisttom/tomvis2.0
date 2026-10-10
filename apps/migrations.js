@@ -14,4 +14,14 @@ export const migrations = [
     CREATE INDEX IF NOT EXISTS sessions_expiry ON sessions(expires_at);
     CREATE INDEX IF NOT EXISTS memberships_tenant_user ON memberships(tenant_id, user_id);
   ` },
+  { version: 3, sql: `
+    CREATE TABLE IF NOT EXISTS error_reports(
+      id INTEGER PRIMARY KEY,tenant_id TEXT NOT NULL REFERENCES tenants(id),fingerprint TEXT NOT NULL,
+      category TEXT NOT NULL,component TEXT NOT NULL,framework_version TEXT NOT NULL,route TEXT NOT NULL,
+      request_id TEXT NOT NULL,occurrences INTEGER NOT NULL DEFAULT 1,
+      first_seen TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,last_seen TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(tenant_id,fingerprint)
+    );
+    CREATE INDEX IF NOT EXISTS error_reports_tenant_seen ON error_reports(tenant_id,last_seen);
+  ` },
 ];

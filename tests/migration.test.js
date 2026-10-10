@@ -11,7 +11,7 @@ test('migrations apply once, preserve legacy V2 records, and add indexes', () =>
     db.exec('CREATE TABLE migrations(version INTEGER PRIMARY KEY); INSERT INTO migrations VALUES(1)');
     db.exec(migrations[0].sql);
     db.prepare('INSERT INTO tenants VALUES(?,?)').run('existing', 'Existing workspace');
-    assert.deepEqual(migrate(db, migrations), [2]);
+    assert.deepEqual(migrate(db, migrations), [2,3]);
     assert.deepEqual(migrate(db, migrations), []);
     assert.equal(db.prepare('SELECT name FROM tenants WHERE id=?').get('existing').name, 'Existing workspace');
     assert(db.prepare("SELECT name FROM sqlite_master WHERE name='feedback_tenant_id'").get());
@@ -31,7 +31,7 @@ test('modified or unknown migrations fail closed', () => {
   const db = new DatabaseSync(':memory:');
   try {
     migrate(db, migrations);
-    assert.throws(() => migrate(db, [{...migrations[0], sql:migrations[0].sql+' SELECT 1;'},migrations[1]]));
+    assert.throws(() => migrate(db, [{...migrations[0], sql:migrations[0].sql+' SELECT 1;'},...migrations.slice(1)]));
     assert.throws(() => migrate(db, [migrations[0]]));
   } finally { db.close(); }
 });

@@ -3,3 +3,9 @@ node_modules/
 data/
 *.log
 .v1-audit/
+.venv/
+__pycache__/
+*.pyc
+.next/
+.env.local
+artifacts/

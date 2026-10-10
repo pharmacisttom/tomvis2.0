@@ -30,6 +30,9 @@ Repository/path for existing TomvisHIMPro Developer Studio, VPS system inventory
 8. Reference modules: Workforce, then EMS after Feedback and Core are stable. Other business domains are separate adapters/modules.
 
 ## Current evidence
+- Active FastAPI backend and Next.js/React frontend implemented with shared contracts; compatibility tests preserve Node alpha database, scrypt passwords and hashed sessions. Actual Next build and real HTTP integration pass.
+- Domain-neutral reporting with Feedback/Users adapters, CSV and print UI, safe local Framework error reporting and React error boundaries implemented. Domain adapters/central collection are pending.
+- Browser workflows, CSV formula-prefix protection and no horizontal overflow verified at 360/390/768/1024/1440 with synthetic data; print PDF generated. Comprehensive accessibility/financial and multi-page print acceptance remain pending.
 - V2 local Feedback prototype and tests preserved on their original branch.
 - V3 branch starts from the tested V2 commit.
 - Added checksummed transactional SQLite migration runner, legacy V2 compatibility and tenant-query indexes.

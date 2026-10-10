@@ -1,0 +1,179 @@
+{
+  "manual": {
+    "appName": "Tomvis Framework V3",
+    "version": "3.0.0-alpha.1",
+    "sections": [
+      {
+        "id": "getting-started",
+        "module": "platform",
+        "title": "เริ่มต้นใช้งาน",
+        "permissions": [],
+        "steps": [
+          "เข้าสู่ระบบด้วยอีเมลและรหัสผ่านที่ผู้ดูแลกำหนด",
+          "ตรวจชื่อ Workspace และป้าย Environment ด้านบนก่อนทำงาน",
+          "เลือกเมนูจาก Sidebar บนมือถือกดปุ่ม ☰ เพื่อเปิดเมนู",
+          "เมื่อเสร็จงานกด ออกจากระบบ"
+        ]
+      },
+      {
+        "id": "dashboard",
+        "module": "platform",
+        "title": "อ่าน Dashboard",
+        "permissions": [
+          "feedback.view"
+        ],
+        "steps": [
+          "เลือก Dashboard เพื่อดูจำนวน Feedback ใน Workspace ปัจจุบัน",
+          "ตรวจรายการ Open, In progress และ Resolved",
+          "กด View all เพื่อเปิดรายการ Feedback ทั้งหมด"
+        ]
+      },
+      {
+        "id": "users",
+        "module": "platform",
+        "title": "ดูรายชื่อผู้ใช้งาน",
+        "permissions": [
+          "users.view"
+        ],
+        "steps": [
+          "เลือก Users ใน Sidebar",
+          "ตรวจชื่อ อีเมล บทบาท และสถานะบัญชี",
+          "Alpha นี้แสดงรายชื่อเท่านั้น ยังไม่มีหน้าจอเพิ่มหรือแก้ไขบัญชี"
+        ]
+      },
+      {
+        "id": "audit",
+        "module": "platform",
+        "title": "ตรวจประวัติการทำงาน",
+        "permissions": [
+          "audit.view"
+        ],
+        "steps": [
+          "เลือก Audit logs",
+          "ตรวจ Action, Actor, Resource และเวลาที่เกิดเหตุการณ์",
+          "ข้อมูลแสดงเฉพาะ Workspace ของบัญชีที่เข้าสู่ระบบ"
+        ]
+      },
+      {
+        "id": "sandbox-reset",
+        "module": "platform",
+        "title": "คืนค่า Sandbox",
+        "permissions": [
+          "sandbox.reset"
+        ],
+        "steps": [
+          "เลือก Sandbox และตรวจว่ากำลังใช้งานพื้นที่ทดลอง",
+          "กด Reset sandbox แล้วอ่านผลกระทบในหน้าต่างยืนยัน",
+          "กดยืนยัน Reset เพื่อแทนที่ Feedback ทดลองด้วยข้อมูลเริ่มต้น",
+          "บัญชีผู้ใช้และ Audit ยังคงอยู่หลัง Reset"
+        ]
+      },
+      {
+        "id": "reports",
+        "module": "platform",
+        "title": "สร้างรายงาน ส่งออก และสั่งพิมพ์",
+        "permissions": [
+          "feedback.view"
+        ],
+        "steps": [
+          "เลือก Reports แล้วเลือกแหล่งข้อมูลที่มีสิทธิ์",
+          "กรอกชื่อรายงานและตัวกรอง แล้วกด สร้างรายงาน",
+          "ตรวจจำนวนทั้งหมดและคำเตือนกรณีข้อมูลถูกจำกัด",
+          "กด ส่งออก CSV หรือ พิมพ์ / บันทึก PDF",
+          "ระบบบัญชีและ HR จะแสดงเมื่อเชื่อม Report Adapter จริงแล้ว"
+        ]
+      },
+      {
+        "id": "system-errors",
+        "module": "platform",
+        "title": "ตรวจข้อผิดพลาด Framework",
+        "permissions": [
+          "audit.view"
+        ],
+        "steps": [
+          "เลือก System errors เพื่อดูข้อผิดพลาดที่บันทึกใน Workspace",
+          "ตรวจประเภท จำนวนครั้ง เวอร์ชัน Framework และ Request ID",
+          "ใช้ fingerprint และเวอร์ชันเพื่อจัดกลุ่มปัญหาที่ควรแก้ใน Core",
+          "ระบบยังไม่ส่งรายงานจาก VPS ลูกค้ามาศูนย์กลางโดยอัตโนมัติ"
+        ]
+      },
+      {
+        "id": "feedback-read",
+        "module": "feedback",
+        "title": "ค้นหาและดู Feedback",
+        "permissions": [
+          "feedback.view"
+        ],
+        "steps": [
+          "เลือก Feedback ใน Sidebar",
+          "พิมพ์หัวข้อในช่องค้นหา หรือเลือกสถานะจาก All status",
+          "ตรวจหมวดหมู่ ความสำคัญ และสถานะของรายการ"
+        ]
+      },
+      {
+        "id": "feedback-create",
+        "module": "feedback",
+        "title": "เพิ่ม Feedback",
+        "permissions": [
+          "feedback.manage"
+        ],
+        "steps": [
+          "กด New feedback บน Dashboard หรือ Feedback",
+          "กรอกหัวข้อ เลือกหมวดหมู่และความสำคัญ",
+          "กด บันทึก Feedback และตรวจว่ารายการใหม่แสดงในตาราง"
+        ]
+      },
+      {
+        "id": "feedback-resolve",
+        "module": "feedback",
+        "title": "ปิดงาน Feedback",
+        "permissions": [
+          "feedback.manage"
+        ],
+        "steps": [
+          "เปิดรายการ Feedback ที่ต้องการดำเนินการ",
+          "กด Resolve เพื่อเปลี่ยนสถานะเป็น Resolved",
+          "ตรวจสถานะในตารางและจำนวนรายการบน Dashboard"
+        ]
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "version": 1,
+      "sql": "\n    CREATE TABLE IF NOT EXISTS tenants(id TEXT PRIMARY KEY,name TEXT NOT NULL);\n    CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,email TEXT UNIQUE NOT NULL,name TEXT NOT NULL,password TEXT NOT NULL,disabled INTEGER DEFAULT 0);\n    CREATE TABLE IF NOT EXISTS memberships(user_id TEXT REFERENCES users(id),tenant_id TEXT REFERENCES tenants(id),role TEXT NOT NULL,PRIMARY KEY(user_id,tenant_id));\n    CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,user_id TEXT REFERENCES users(id),tenant_id TEXT REFERENCES tenants(id),expires_at INTEGER);\n    CREATE TABLE IF NOT EXISTS feedback(id INTEGER PRIMARY KEY AUTOINCREMENT,tenant_id TEXT REFERENCES tenants(id),subject TEXT,category TEXT,status TEXT,priority TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP);\n    CREATE TABLE IF NOT EXISTS audit_logs(id INTEGER PRIMARY KEY,tenant_id TEXT,actor TEXT,action TEXT,resource TEXT,resource_id TEXT,old_value TEXT,new_value TEXT,ip TEXT,user_agent TEXT,request_id TEXT,timestamp TEXT DEFAULT CURRENT_TIMESTAMP);\n  "
+    },
+    {
+      "version": 2,
+      "sql": "\n    CREATE INDEX IF NOT EXISTS feedback_tenant_id ON feedback(tenant_id, id);\n    CREATE INDEX IF NOT EXISTS audit_tenant_id ON audit_logs(tenant_id, id);\n    CREATE INDEX IF NOT EXISTS sessions_expiry ON sessions(expires_at);\n    CREATE INDEX IF NOT EXISTS memberships_tenant_user ON memberships(tenant_id, user_id);\n  "
+    },
+    {
+      "version": 3,
+      "sql": "\n    CREATE TABLE IF NOT EXISTS error_reports(\n      id INTEGER PRIMARY KEY,tenant_id TEXT NOT NULL REFERENCES tenants(id),fingerprint TEXT NOT NULL,\n      category TEXT NOT NULL,component TEXT NOT NULL,framework_version TEXT NOT NULL,route TEXT NOT NULL,\n      request_id TEXT NOT NULL,occurrences INTEGER NOT NULL DEFAULT 1,\n      first_seen TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,last_seen TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n      UNIQUE(tenant_id,fingerprint)\n    );\n    CREATE INDEX IF NOT EXISTS error_reports_tenant_seen ON error_reports(tenant_id,last_seen);\n  "
+    }
+  ],
+  "roles": {
+    "super_admin": [
+      "*"
+    ],
+    "admin": [
+      "feedback.view",
+      "feedback.manage",
+      "users.view",
+      "audit.view",
+      "sandbox.reset"
+    ],
+    "manager": [
+      "feedback.view",
+      "feedback.manage",
+      "users.view"
+    ],
+    "staff": [
+      "feedback.view",
+      "feedback.manage"
+    ],
+    "viewer": [
+      "feedback.view"
+    ]
+  }
+}
