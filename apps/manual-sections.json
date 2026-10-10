@@ -1,0 +1,10 @@
+{
+  "name":"platform",
+  "guide":[
+    {"id":"getting-started","title":"เริ่มต้นใช้งาน","permissions":[],"steps":["เข้าสู่ระบบด้วยอีเมลและรหัสผ่านที่ผู้ดูแลกำหนด","ตรวจชื่อ Workspace และป้าย Environment ด้านบนก่อนทำงาน","เลือกเมนูจาก Sidebar บนมือถือกดปุ่ม ☰ เพื่อเปิดเมนู","เมื่อเสร็จงานกด ออกจากระบบ"]},
+    {"id":"dashboard","title":"อ่าน Dashboard","permissions":["feedback.view"],"steps":["เลือก Dashboard เพื่อดูจำนวน Feedback ใน Workspace ปัจจุบัน","ตรวจรายการ Open, In progress และ Resolved","กด View all เพื่อเปิดรายการ Feedback ทั้งหมด"]},
+    {"id":"users","title":"ดูรายชื่อผู้ใช้งาน","permissions":["users.view"],"steps":["เลือก Users ใน Sidebar","ตรวจชื่อ อีเมล บทบาท และสถานะบัญชี","Alpha นี้แสดงรายชื่อเท่านั้น ยังไม่มีหน้าจอเพิ่มหรือแก้ไขบัญชี"]},
+    {"id":"audit","title":"ตรวจประวัติการทำงาน","permissions":["audit.view"],"steps":["เลือก Audit logs","ตรวจ Action, Actor, Resource และเวลาที่เกิดเหตุการณ์","ข้อมูลแสดงเฉพาะ Workspace ของบัญชีที่เข้าสู่ระบบ"]},
+    {"id":"sandbox-reset","title":"คืนค่า Sandbox","permissions":["sandbox.reset"],"steps":["เลือก Sandbox และตรวจว่ากำลังใช้งานพื้นที่ทดลอง","กด Reset sandbox แล้วอ่านผลกระทบในหน้าต่างยืนยัน","กดยืนยัน Reset เพื่อแทนที่ Feedback ทดลองด้วยข้อมูลเริ่มต้น","บัญชีผู้ใช้และ Audit ยังคงอยู่หลัง Reset"]}
+  ]
+}

@@ -1,1 +1,58 @@
-{"name":"feedback","version":"2.0.0-alpha.1","permissions":["feedback.view","feedback.manage"],"sandbox":true,"routes":["/api/v1/feedback"],"events":["feedback.created","feedback.updated"],"services":[],"migrations":[],"configuration":{},"ui":"Feedback"}
+{
+  "name": "feedback",
+  "version": "2.0.0-alpha.1",
+  "permissions": [
+    "feedback.view",
+    "feedback.manage"
+  ],
+  "sandbox": true,
+  "routes": [
+    "/api/v1/feedback"
+  ],
+  "events": [
+    "feedback.created",
+    "feedback.updated"
+  ],
+  "services": [],
+  "migrations": [],
+  "configuration": {},
+  "ui": "Feedback",
+  "guide": [
+    {
+      "permissions": [
+        "feedback.view"
+      ],
+      "id": "feedback-read",
+      "steps": [
+        "เลือก Feedback ใน Sidebar",
+        "พิมพ์หัวข้อในช่องค้นหา หรือเลือกสถานะจาก All status",
+        "ตรวจหมวดหมู่ ความสำคัญ และสถานะของรายการ"
+      ],
+      "title": "ค้นหาและดู Feedback"
+    },
+    {
+      "permissions": [
+        "feedback.manage"
+      ],
+      "id": "feedback-create",
+      "steps": [
+        "กด New feedback บน Dashboard หรือ Feedback",
+        "กรอกหัวข้อ เลือกหมวดหมู่และความสำคัญ",
+        "กด บันทึก Feedback และตรวจว่ารายการใหม่แสดงในตาราง"
+      ],
+      "title": "เพิ่ม Feedback"
+    },
+    {
+      "permissions": [
+        "feedback.manage"
+      ],
+      "id": "feedback-resolve",
+      "steps": [
+        "เปิดรายการ Feedback ที่ต้องการดำเนินการ",
+        "กด Resolve เพื่อเปลี่ยนสถานะเป็น Resolved",
+        "ตรวจสถานะในตารางและจำนวนรายการบน Dashboard"
+      ],
+      "title": "ปิดงาน Feedback"
+    }
+  ]
+}

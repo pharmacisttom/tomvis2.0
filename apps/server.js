@@ -7,6 +7,8 @@ import {verifyPassword,redact} from '../packages/security/index.js';
 import {can,roles} from '../packages/rbac/index.js';
 import {migrations} from './migrations.js';
 import {runtimeConfig,VERSION} from '../packages/config/index.js';
+import {manual} from './manual-registry.js';
+import {manualForUser} from '../packages/core/manual.js';
 
 export function createApp(db,{mode='sandbox'}={}) {
  if(!['sandbox','demo','development'].includes(mode))throw Error('This alpha supports isolated local environments only');
@@ -34,6 +36,7 @@ export function createApp(db,{mode='sandbox'}={}) {
  const member=db.prepare('SELECT * FROM memberships WHERE user_id=? ORDER BY tenant_id LIMIT 1').get(account.id);if(!member)fail(403,'No workspace membership');const session=randomBytes(32).toString('hex');atomic(()=>{db.prepare('INSERT INTO sessions VALUES(?,?,?,?)').run(digest(session),account.id,member.tenant_id,now+8*3600000);audit('login.success','session','',null,null,{id:account.id,tenant_id:member.tenant_id});});res.setHeader('Set-Cookie',`tv_session=${session}; HttpOnly; SameSite=Strict; Path=/; Max-Age=28800`);return reply(200,{name:account.name});}
  if(!user||user.disabled)fail(401,'Please sign in');
  const requirePermission=p=>{if(!can(user.role,p))fail(403,'Permission denied');};
+ if(url.pathname==='/api/v1/manual'&&req.method==='GET')return reply(200,manualForUser(manual,p=>can(user.role,p)));
  if(url.pathname==='/api/v1/me'&&req.method==='GET')return reply(200,{...user,roles,mode,workspace:db.prepare('SELECT name FROM tenants WHERE id=?').get(user.tenant_id).name});
  if(url.pathname==='/api/v1/logout'&&req.method==='POST'){atomic(()=>{db.prepare('DELETE FROM sessions WHERE token=?').run(digest(token));audit('logout','session','',null,null);});res.setHeader('Set-Cookie','tv_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');return reply(200,{});}
  if(url.pathname==='/api/v1/feedback'&&req.method==='GET'){requirePermission('feedback.view');const q=(url.searchParams.get('q')||'').slice(0,200);return reply(200,db.prepare('SELECT id,subject,category,status,priority,created_at FROM feedback WHERE tenant_id=? AND subject LIKE ? ORDER BY id DESC LIMIT 100').all(user.tenant_id,`%${q}%`));}
